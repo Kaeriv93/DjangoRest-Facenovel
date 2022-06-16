@@ -5,9 +5,12 @@ from rest_framework.permissions import IsAuthenticated
 
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework import status
+
 
 from .serializers import PostSerializer
-from base.models import Post
+from base.models import Post, Profile
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
@@ -36,6 +39,7 @@ def getRoutes(request):
 @api_view(['GET','PUT','POST','DELETE'])
 
 def getPosts(request):
+    parser_classes = (MultiPartParser, FormParser)
     posts = Post.objects.all()
     serializer = PostSerializer(posts, many = True)
     return Response(serializer.data)
