@@ -8,12 +8,12 @@ class PostSerializer(ModelSerializer):
         model = Post
         fields = '__all__'
         
-class Profile(ModelSerializer):
+class ProfileSerializer(ModelSerializer):
     class Meta:
         model = Profile
         fields = '__all__'
         
-class User(ModelSerializer):
+class UserSerializer(ModelSerializer):
     class Meta:
-        model = User
+        model =User
         fields = '__all__'
