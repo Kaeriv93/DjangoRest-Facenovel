@@ -1,6 +1,7 @@
 from django.http import JsonResponse
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
+from rest_framework import permissions
 from rest_framework.permissions import IsAuthenticated
 
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -39,7 +40,6 @@ def getRoutes(request):
 @api_view(['GET','PUT','POST','DELETE'])
 
 def getPosts(request):
-    parser_classes = (MultiPartParser, FormParser)
     posts = Post.objects.all()
     serializer = PostSerializer(posts, many = True)
     return Response(serializer.data)
